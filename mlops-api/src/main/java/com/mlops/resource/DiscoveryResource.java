@@ -8,11 +8,7 @@ import javax.ws.rs.core.Response;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- DiscoveryResource class
- GET /api/v1  - > returns API metadata.
- */
-@Path("/")
+@Path("discovery")
 @Produces(MediaType.APPLICATION_JSON)
 public class DiscoveryResource {
 
@@ -26,7 +22,7 @@ public class DiscoveryResource {
 
         Map<String, String> resources = new HashMap<>();
         resources.put("workspaces", "/api/v1/workspaces");
-        resources.put("models",     "/api/v1/models");
+        resources.put("models", "/api/v1/models");
         meta.put("resources", resources);
 
         return Response.ok(meta).build();

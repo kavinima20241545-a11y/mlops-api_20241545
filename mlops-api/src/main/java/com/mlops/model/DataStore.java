@@ -3,8 +3,8 @@ package com.mlops.model;
 import java.util.*;
 
 /**
- Data Store Class
- Uses static maps
+ * Data Store Class
+ * Uses static maps
  */
 public class DataStore {
 
@@ -30,14 +30,20 @@ public class DataStore {
                 "MOD-8832", "TensorFlow", "DEPLOYED", 0.92, "WSVISION-01");
         MachineLearningModel m2 = new MachineLearningModel(
                 "MOD-0011", "PyTorch", "TRAINING", 0.75, "WSNLP-02");
+        MachineLearningModel m3 = new MachineLearningModel(
+                "MOD-DEPR", "Scikit-Learn", "DEPRECATED", 0.60, "WSNLP-02");
+
         models.put(m1.getId(), m1);
         models.put(m2.getId(), m2);
+        models.put(m3.getId(), m3);
 
         ws1.getModelIds().add(m1.getId());
         ws2.getModelIds().add(m2.getId());
+        ws2.getModelIds().add(m3.getId());
 
         metrics.put(m1.getId(), new ArrayList<>());
         metrics.put(m2.getId(), new ArrayList<>());
+        metrics.put(m3.getId(), new ArrayList<>());
     }
 
     public static DataStore getInstance() { return INSTANCE; }

@@ -9,25 +9,21 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.logging.Logger;
 
-/**
- *main class
- * Server listens to http://localhost:8080/api/v1
- */
 public class Main {
 
     private static final Logger LOG = Logger.getLogger(Main.class.getName());
-    public static final String BASE_URI = "http://0.0.0.0:8080/";
 
     public static void main(String[] args) throws IOException {
-        // Scan the whole com.mlops package for @Path, @Provider classes
-        final ResourceConfig config = new ResourceConfig()
-                .packages("com.mlops")
-                .register(JacksonFeature.class);  // Jackson JSON serialization
 
-        final HttpServer server = GrizzlyHttpServerFactory.createHttpServer(
-                URI.create(BASE_URI), config);
+        ResourceConfig config = new ResourceConfig();
+        config.packages("com.mlops.resource", "com.mlops.exception", "com.mlops.filter");
+        config.register(JacksonFeature.class);
 
-        LOG.info("MLOps API running at http://localhost:8080/api/v1");
+        URI baseUri = URI.create("http://0.0.0.0:8080/api/v1/");
+
+        HttpServer server = GrizzlyHttpServerFactory.createHttpServer(baseUri, config);
+
+        LOG.info("=== Server started: http://localhost:8080/api/v1/ ===");
         LOG.info("Press ENTER to stop...");
         System.in.read();
         server.shutdownNow();

@@ -15,7 +15,7 @@ import java.util.UUID;
 /**
  Workspace Management
  */
-@Path("/workspaces")
+@Path("workspaces")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class WorkspaceResource {
@@ -23,6 +23,7 @@ public class WorkspaceResource {
     private final DataStore store = DataStore.getInstance();
 
     // GET
+    @GET
     public Response getAllWorkspaces() {
         List<MLWorkspace> list = new ArrayList<>(store.getWorkspaces().values());
         return Response.ok(list)
